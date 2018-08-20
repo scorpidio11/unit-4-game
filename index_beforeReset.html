@@ -91,14 +91,14 @@
 
             <div class="panel-body col-md-3 col-xs-6 alert alert-info">
                 Target Number:
-                <h2 id="targetNum">
-                </h2>
+                <h1 id="targetNum">
+                    </h2>
             </div>
 
 
             <div class="panel-body col-md-3 col-xs-6 alert alert-info">
                 Your Total Number:
-                <h2 id="totalNum">0</h2>
+                <h1 id="totalNum">0</h2>
             </div>
             <div class="col-md-3"> </div>
 
@@ -177,38 +177,34 @@ Reset game
 
         $(document).ready(function () {
 
-
-
-
-
-            var targetNumer = Math.floor(Math.random() * 120 + 19); // random traget number 19-120
+            
+            var newRandom = Math.floor(Math.random() * 120 + 19);
+            var randomNum = Math.floor(Math.random() * 120 + 19); // random trager number 19-120
             var bt1 = Math.floor(Math.random() * 12 + 1);
             var bt2 = Math.floor(Math.random() * 12 + 1);
             var bt3 = Math.floor(Math.random() * 12 + 1);
             var bt4 = Math.floor(Math.random() * 12 + 1);
-
-
+           
+           
             // var crystalRandom = Math.floor(Math.random()*12+1);
 
+
+
             var total = 0;
-            var win = 1;
-            var lose = 1;
+            var win =   1;
+            var lose =  1;
             var message = "";
 
 
             // 1. random number 19-120 show on the page on load & Apped random numbers to Crystal
 
-            $("#targetNum").text(targetNumer);
-
-
-
-
+            $("#targetNum").text(randomNum);
+    
 
 
             // <button1>
 
-            //Event delegation   $("#button1").on("click", function () 
-            $(document).on("click", "#button1", function () {
+            $("#button1").on("click", function () {
 
 
                 $("#button1").append(bt1);
@@ -216,36 +212,32 @@ Reset game
 
                 total += bt1;
                 $("#totalNum").text(total);
-
-                if (total === targetNumer) {
+               
+                if (total === randomNum) {
                     $("#message").text("YOU WON");
                     $("#win").text(win++);
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button1").empty();
-                    bt1 = Math.floor(Math.random() * 12 + 1);
-                    $("#button1").append(bt1);
                   
+                    $("#targetNum").text(newRandom);
+                    $("#totalNum").remove(0);
                 }
 
-                else if (total > targetNumer) {
+                else if (total > randomNum) {
                     $("#message").text("YOU LOST");
                     $("#lose").text(lose++);
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button1").empty();
-                    bt1 = Math.floor(Math.random() * 12 + 1);
-                    $("#button1").append(bt1);
+                 
+                    $("#targetNum").text(newRandom);
+                    $("#totalNum").remove("0");
+
                 }
+               
+
             });
 
 
 
             // <button2>
 
-            $(document).on("click", "#button2", function () {
+            $("#button2").on("click", function () {
 
 
                 $("#button2").append(bt2);
@@ -253,32 +245,22 @@ Reset game
 
                 total += bt2;
                 $("#totalNum").text(total);
+                
 
 
-
-                if (total === targetNumer) {
+                  if (total === randomNum) {
                     $("#message").text("YOU WON");
                     $("#win").text(win++);
-
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button2").empty();
-                    bt2 = Math.floor(Math.random() * 12 + 1);
-                    $("#button2").append(bt2);
-                    
+                    $("#targetNum").text(newRandom);
                    
+                  
                 }
 
-                else if (total > targetNumer) {
+                else if (total > randomNum) {
                     $("#message").text("YOU LOST");
                     $("#lose").text(lose++);
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button2").empty();
-                    bt2 = Math.floor(Math.random() * 12 + 1);
-                    $("#button2").append(bt2);
+                    $("#targetNum").text(newRandom);
+                   
                 }
 
             });
@@ -286,7 +268,7 @@ Reset game
 
             // <button3>
 
-            $(document).on("click", "#button3", function () {
+            $("#button3").on("click", function () {
 
 
                 $("#button3").append(bt3);
@@ -294,30 +276,19 @@ Reset game
 
                 total += bt3;
                 $("#totalNum").text(total);
+                
 
-
-                if (total === targetNumer) {
+               if (total === randomNum) {
                     $("#message").text("YOU WON");
                     $("#win").text(win++);
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button3").empty();
-                    bt3 = Math.floor(Math.random() * 12 + 1);
-                    $("#button3").append(bt3);
-
+                  
                 }
 
-                else if (total > targetNumer) {
+                else if (total > randomNum) {
                     $("#message").text("YOU LOST");
                     $("#lose").text(lose++);
+                   
 
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button3").empty();
-                    bt3 = Math.floor(Math.random() * 12 + 1);
-                    $("#button3").append(bt3);
                 }
 
             });
@@ -325,7 +296,7 @@ Reset game
             // <button4>
 
 
-            $(document).on("click", "#button4", function () {
+            $("#button4").on("click", function () {
 
 
                 $("#button4").append(bt4);
@@ -333,54 +304,30 @@ Reset game
 
                 total += bt4;
                 $("#totalNum").text(total);
+             
 
-                
 
-                if (total === targetNumer) {
+                   if (total === randomNum) {
                     $("#message").text("YOU WON");
                     $("#win").text(win++);
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset(); 
-                    $("#button4").empty();
-                    bt4 = Math.floor(Math.random() * 12 + 1);
-                    $("#button4").append(bt4);
+                   
                 }
 
-                else if (total > targetNumer) {
+                else if (total > randomNum) {
                     $("#message").text("YOU LOST");
                     $("#lose").text(lose++);
-                    total = 0;
-                    $("#totalNum").text(total);
-                    reset();
-                    $("#button4").empty();
-                    bt4 = Math.floor(Math.random() * 12 + 1);
-                    $("#button4").append(bt4);
+                   
                 }
 
             });
 
-
-
-            function reset() {
-                $("#targetNum").empty();
-
-
-                var targetNumer = Math.floor(Math.random() * 120 + 19);
-                $("#targetNum").text(targetNumer);
-
-
-            }
-
-
-  
-
-
-
-
-
-
-
+ 
+    // function clear() {
+    //     $("#targetNum").text(newRandom);
+    //     var total = 0;
+    //     $("#totalNum").empty();
+        
+    //   }
 
 
 

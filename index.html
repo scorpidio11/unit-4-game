@@ -146,31 +146,36 @@
 
 
 
-Target number  19-120 (Randomly generate when page load or reset)
-button Number  1-12 (Randomly generate when page load or reset)
+Random Target number  19-120 (Randomly generate when page load and reassign when game is done)
+Four Random Crystal Number  1-12 (Randomly generate when page load and reassign when game is done)
 
-4 Crystal random number needs to be assinged to each button
 
-Total Number button number + button numer < target
+Click Function on 4 Crystal buttons
 
-click function : add up numbers until total number < traget number
+Click function : add up numbers until total number < traget number and reset the game
 
 If total number = targer number  win++
-if total number > trager number 
+
+else if total number > trager number 
 continue game
 if total numer < target number  lose++
 
 If win > increase winning number +1
-text you won
+text you won!
 reset target number to new random
 reset total number to 0
+Reassign 4 random numbers
 
 If lost > increase winning number +1
-text you lose
+text you lost
 reset target number
+Reassign 4 random numbers
+----------------------------------------
+int var = 0;
+System.out.println(var++); // returns 0;
 
-Reset game
-
+var = 0;
+System.out.println(++var); // returns 1
 
      -->
     <script type="text/javascript">
@@ -191,8 +196,8 @@ Reset game
             // var crystalRandom = Math.floor(Math.random()*12+1);
 
             var total = 0;
-            var win = 1;
-            var lose = 1;
+            var win = 0;
+            var lose = 0;
             var message = "";
 
 
@@ -217,10 +222,10 @@ Reset game
 
                 if (total === targetNumber) {
                     $("#message").text("YOU WON");
-                    $("#win").text(win++);
+                    $("#win").text(++win);
 
 
-                    // re assigning button #
+                    // re assigning button do not use var  #
                         $("#button1").empty();
                     bt1 = Math.floor(Math.random() * 12 + 1);
                     $("#button1").append(bt1);
@@ -233,7 +238,7 @@ Reset game
 
                 else if (total > targetNumber) {
                     $("#message").text("YOU LOST");
-                    $("#lose").text(lose++);
+                    $("#lose").text(++lose);
 
 
 
@@ -262,7 +267,7 @@ Reset game
 
                 if (total === targetNumber) {
                     $("#message").text("YOU WON");
-                    $("#win").text(win++);
+                    $("#win").text(++win);
 
 
 
@@ -275,7 +280,7 @@ Reset game
 
                 else if (total > targetNumber) {
                     $("#message").text("YOU LOST");
-                    $("#lose").text(lose++);
+                    $("#lose").text(++lose);
 
 
    // re assigning button #
@@ -303,7 +308,7 @@ Reset game
 
                 if (total === targetNumber) {
                     $("#message").text("YOU WON");
-                    $("#win").text(win++);
+                    $("#win").text(++win);
 
 
                     reset();
@@ -316,7 +321,7 @@ Reset game
 
                 else if (total > targetNumber) {
                     $("#message").text("YOU LOST");
-                    $("#lose").text(lose++);
+                    $("#lose").text(++lose);
 
 
                     reset();
@@ -343,7 +348,7 @@ Reset game
 
                 if (total === targetNumber) {
                     $("#message").text("YOU WON");
-                    $("#win").text(win++);
+                    $("#win").text(++win);
 
                     reset();
                     $("#button4").empty();
@@ -353,7 +358,7 @@ Reset game
 
                 else if (total > targetNumber) {
                     $("#message").text("YOU LOST");
-                    $("#lose").text(lose++);
+                    $("#lose").text(++lose);
 
 
                     reset();

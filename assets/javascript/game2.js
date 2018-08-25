@@ -1,64 +1,107 @@
 
-    // VARIABLES
-      // ==========================================================================
-    var wins = 0;
-    var loses = 0;
-    var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-   
-    //var computerChoices = "abcdefghijklmnopqrstuvwxyz";
-    var guessLeft = 9;
+$(document).ready(function () {
 
-    var userGuessTotal = [];
-    //var computerGuessTotal = [];
 
-    // var reset = function () {
-    //     document.location.reload(true);
+    var total = 0;
+    var win = 0;
+    var lose = 0;
+    var message = "";
 
-    // }
 
-     // FUNCTIONS
-      // ==============================================================================
-    document.onkeyup = function (event) {
-        var userGuess = event.key.toLowerCase();
-        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-    
-      //Guessed Alpahet added to empty arry and show on screen
-        userGuessTotal.push(userGuess);
-      
 
-        if (userGuess == computerGuess){
-            wins++;
-            guessLeft = 9;
-            userGuessTotal.length = 0;
+
+    var targetNumber = Math.floor(Math.random() * 120) + 19; // random traget number 19-120
+    $("#targetNum").text(targetNumber);
+
+
+    // random crystal numbers
+
+    for (var i = 0; i < 4; i++) {
+
+        var random = Math.floor(Math.random() * 12) + 1;
+
+        var crystal = $("<div>");
+        crystal.attr({
+
+            "class": "crystal",
+            "data-random": random
+
+            // <div class="crystals">
+            // <div class="crystal" data-random="7"></div>
+        });
+
+        $(".crystals").append(crystal);
+
+        console.log(random);
+
+    }
+    colorReset();
+
+
+    //Reset Colors while reloading Reference site  http://jsfiddle.net/VXG36/1/
+
+    function colorReset() {
+        var randomColors = ["green", "purple", "red", "blue"];
+        $(".crystal").each(function (index) {
+            var len = randomColors.length;
+            var randomNum = Math.floor(Math.random() * len);
+            $(this).css("backgroundColor", randomColors[randomNum]);
+            //Removes color from array so it can't be used again
+            randomColors.splice(randomNum, 1);
+        });
+
+    }
+
+
+    // When user clicks crystal button
+
+    $(".crystal").on("click", function () {
+        var num = parseInt($(this).attr('data-random'));
+        console.log(num);
+
+        total += num;
+        $("#totalNum").text(total);
+
+        if (total === targetNumber) {
+            $("#message").text("YOU WON");
+            $("#win").text(++win);
+
+            reset();
+            colorReset();
+
+            console.log(random);
+
         }
 
-        else if  (guessLeft == 0)
-        
-        {
-            loses++;
-            guessLeft = 9;
-            userGuessTotal.length = 0;
-          
+        else if (total > targetNumber) {
+            $("#message").text("YOU LOST");
+            $("#lose").text(++lose);
+
+            reset();
+            colorReset();
         }
-
-        else if (userGuess !== computerGuess){
-            guessLeft--; //decrementing the guesses left
-        }  
-
-      
+    });
 
 
-        // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
-        var html =
+    function reset() {
+
+        $("#totalNum").empty();
+        total = 0;
+        $("#totalNum").text(total);
+
+        console.log(total);
+
+        $("#targetNum").empty();
+        targetNumber = Math.floor(Math.random() * 120 + 19);
 
 
-            "<p>Wins: " + wins + "</p>" +
-            "<p>Losses: " + loses + "</p>" +
-            "<p>Guesses Left: " + guessLeft + "</p>" +
-            // "<p>Computer Guesses so far:  " + computerGuessTotal + "</p>" +
-            "<p>Your Guesses so far: " + userGuessTotal + "</p>";
+        $("#targetNum").text(targetNumber);
+        console.log(targetNumber);
 
-        // Set the inner HTML contents of the #game div to our html string
-        document.querySelector("#game").innerHTML = html;
-  
-    };
+
+    }
+
+});
+
+
+

@@ -1,6 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Psudo Code
+* The random number shown at the start of the game should be between 19 - 120.
+
+* Each crystal should have a random hidden value between 1 - 12.
+
+
+
+Target number  19-120 (Randomly generate when page load or reset)
+button Number  1-12 (Randomly generate when page load or reset)
+
+4 Crystal random number needs to be assinged to each button
+
+Total Number button number + button numer < target
+
+click function : add up numbers until total number < traget number
+
+If total number = targer number  win++
+if total number > trager number 
+continue game
+if total numer < target number  lose++
+
+If win > increase winning number +1
+text you won
+reset target number to new random
+reset total number to 0
+
+If lost > increase winning number +1
+text you lose
+reset target number
+
+Reset game
+
+
+     -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +79,7 @@
 
         }
     </style>
-    <!-- <script src="assets/javascript/game2.js"></script> -->
+    <script src="assets/javascript/game2.js"></script>
 </head>
 
 <body>
@@ -60,11 +95,11 @@
                     <h2 class="text-center">Crystal Collector</h2>
 
                     </h1>
-                    <h5 class="text-justify">You will be given a random number at the start of the game. There are four crystals below. By clicking
-                        on a crystal you will add a specific amoutn of points to your total score. You win the game by matching
-                        your totla score to random number, you lose the game if your total scor goes above the random number.
-                        The value of each crystal is hidden from you until you click on it. Each time when the game starts,
-                        the game will change the values of eachs crystal.</h5>
+                    <h5 class="text-justify">You will be given a random number at the start of the game. There are four crystals
+                        below. By clicking on a crystal you will add a specific amoutn of points to your total score. You
+                        win the game by matching your totla score to random number, you lose the game if your total scor
+                        goes above the random number. The value of each crystal is hidden from you until you click on it.
+                        Each time when the game starts, the game will change the values of eachs crystal.</h5>
 
 
                 </div>
@@ -150,153 +185,8 @@
     </div>
 
 
-    <!-- Sudo Code
-* The random number shown at the start of the game should be between 19 - 120.
-
-* Each crystal should have a random hidden value between 1 - 12.
 
 
-
-Target number  19-120 (Randomly generate when page load or reset)
-button Number  1-12 (Randomly generate when page load or reset)
-
-4 Crystal random number needs to be assinged to each button
-
-Total Number button number + button numer < target
-
-click function : add up numbers until total number < traget number
-
-If total number = targer number  win++
-if total number > trager number 
-continue game
-if total numer < target number  lose++
-
-If win > increase winning number +1
-text you won
-reset target number to new random
-reset total number to 0
-
-If lost > increase winning number +1
-text you lose
-reset target number
-
-Reset game
-
-
-     -->
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-
-            var total = 0;
-            var win = 0;
-            var lose = 0;
-            var message = "";
-
-
-
-
-            var targetNumber = Math.floor(Math.random() * 120) + 19; // random traget number 19-120
-            $("#targetNum").text(targetNumber);
-
-
-            // random crystal numbers
-
-
-
-
-
-            for (var i = 0; i < 4; i++) {
-
-                var random = Math.floor(Math.random() * 12) + 1;
-
-                var crystal = $("<div>");
-                crystal.attr({
-
-                    "class": "crystal",
-                    "data-random": random
-
-                    // <div class="crystals">
-                    // <div class="crystal" data-random="7"></div>
-                });
-
-                $(".crystals").append(crystal);
-
-                console.log(random);
-
-            }
-            colorReset();
-            // http://jsfiddle.net/VXG36/1/
-
-function colorReset(){
-            var randomColors = ["green", "purple", "red", "blue"];
-            $(".crystal").each(function (index) {
-                var len = randomColors.length;
-                var randomNum = Math.floor(Math.random() * len);
-                $(this).css("backgroundColor", randomColors[randomNum]);
-                //Removes color from array so it can't be used again
-                randomColors.splice(randomNum, 1);
-            });
-
-}
-
-
-            // When user clicks crystal button
-
-            $(".crystal").on("click", function () {
-                var num = parseInt($(this).attr('data-random'));
-                console.log(num);
-
-                total += num;
-                $("#totalNum").text(total);
-
-                if (total === targetNumber) {
-                    $("#message").text("YOU WON");
-                    $("#win").text(++win);
-
-                    reset();
-                    colorReset();
-
-                    console.log(random);
-
-                }
-
-                else if (total > targetNumber) {
-                    $("#message").text("YOU LOST");
-                    $("#lose").text(++lose);
-
-                    reset();
-                    colorReset();
-                }
-            });
-
-
-            function reset() {
-                
-                $("#totalNum").empty();
-                total = 0;
-                $("#totalNum").text(total);
-
-                console.log(total);
-
-                $("#targetNum").empty();
-                targetNumber = Math.floor(Math.random() * 120 + 19);
-
-
-                $("#targetNum").text(targetNumber);
-                console.log(targetNumber);
-
-                
-            }
-
-        });
-
-
-
-
-
-    </script>
 
 </body>
 
